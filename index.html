@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Calculo de horas</title>
+</head>
+<body>
+  <div id="app">
+    <div class="inputs">
+      <label>Digite o tempo inicial:</label>
+      <input id="start-time" type="text" maxlength="5" onkeyup="calculateTime();" />
+      <label>Digite o tempo final:</label>
+      <input id="end-time" type="text" maxlength="5" onkeyup="calculateTime();" />
+    </div>
+    <div class="result">
+      <h2>Resultado:</h2>
+      <p id="time-difference"></p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
