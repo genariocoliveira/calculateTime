@@ -86,7 +86,7 @@ function calcularDiferenca() {
   if (!horas & !minutos) {
     alert('Erro')
   } else {
-    document.getElementById("resultado").innerHTML = "Diferença: " + horas + " horas e " + minutos + " minutos.";
+    document.getElementById("resultado").innerHTML = horas + " horas e " + minutos + " minutos.";
   }
 
   var inicioH = hora.value = ""
