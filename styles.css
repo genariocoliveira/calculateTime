@@ -101,3 +101,16 @@ button:hover {
   font-weight: 700;
   margin-top: 1rem;
 }
+
+footer{
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 30px;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.76);
+}
