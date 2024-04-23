@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/png" href="https://purepng.com/public/uploads/large/purepng.com-round-wall-clockelectronics-clock-watch-analog-clock-wall-clock-941524673255yj9ql.png">
-  
+  <link rel="icon" type="image/png"
+    href="https://purepng.com/public/uploads/large/purepng.com-round-wall-clockelectronics-clock-watch-analog-clock-wall-clock-941524673255yj9ql.png">
+
   <title>Calculo de horas</title>
 </head>
+
 <body>
-  <div id="app">
+  <!-- <div id="app">
     <div class="inputs">
       <label>Digite o tempo inicial:</label>
       <input id="start-time" type="text" maxlength="5" onkeyup="calculateTime();" />
@@ -22,6 +25,22 @@
       <p id="time-difference"></p>
     </div>
   </div>
+  <script src="script.js"></script> -->
+  <div class="container">
+    <h1>Calculadora de Diferença de Horário</h1>
+    <div class="input-container">
+      <label for="start">Horário de Início:</label>
+      <input type="time" id="start">
+    </div>
+    <div class="input-container">
+      <label for="end">Horário de Término:</label>
+      <input type="time" id="end">
+    </div>
+    <button onclick="calcularDiferenca()">Calcular</button>
+    <div id="resultado" class="resultado"></div>
+  </div>
+
   <script src="script.js"></script>
 </body>
+
 </html>
