@@ -1,99 +1,83 @@
-// function calculateTime() {
-//   let startTime = document.getElementById('start-time').value;
-//   let endTime = document.getElementById('end-time').value;
+const hora = document.getElementById("start");
+const fim = document.getElementById('end');
 
-//   if (!/^\d{2}:\d{2}$/.test(startTime) || !/^\d{2}:\d{2}$/.test(endTime)) {
-//     document.getElementById('time-difference').innerHTML =
-//       'Formato inválido. Por favor, insira o tempo no formato hh:mm.';
-//     return;
-//   }
+hora.focus();
 
-//   startTime = startTime.split(':');
-//   endTime = endTime.split(':');
+// Adicionando os dois pontos automaticamente ao digitar nos campos de entrada de texto
+document.addEventListener("DOMContentLoaded", function() {
+    hora.addEventListener("input", function() {
+        var value = this.value.replace(/\D/g, '');
+        var hours = value.substring(0, 2);
+        var minutes = value.substring(2, 4);
+        this.value = hours + (minutes ? ':' + minutes : '');
+    });
 
-//   let startDate = new Date();
-//   startDate.setHours(startTime[0]);
-//   startDate.setMinutes(startTime[1]);
-//   startDate.setSeconds(0);
-
-//   let endDate = new Date();
-//   endDate.setHours(endTime[0]);
-//   endDate.setMinutes(endTime[1]);
-//   endDate.setSeconds(0);
-
-//   let difference = endDate.getTime() - startDate.getTime();
-//   difference = Math.floor(difference / 1000 / 60);
-
-//   let hours = Math.floor(difference / 60);
-//   let minutes = difference % 60;
-
-//   let result = hours + ' horas e ' + minutes + ' minutos';
-//   document.getElementById('time-difference').innerHTML = result;
-// }
-
-// let inputs = document.querySelectorAll("input[type='text']");
-
-// for (let i = 0; i < inputs.length; i++) {
-//   inputs[i].addEventListener('keydown', function (event) {
-//     if (event.key === 'Tab') {
-//       event.preventDefault();
-//       if (i === inputs.length - 1) {
-//         inputs[0].focus();
-//         startTime.value = '';
-//       } else {
-//         inputs[i + 1].focus();
-//         endTime.value = '';
-//       }
-//     }
-//   });
-// }
-
-// let startTime = document.getElementById('start-time');
-
-// startTime.addEventListener('input', function () {
-//   if (this.value.length === 2) {
-//     this.value += ':';
-//   }
-// });
-// let endTime = document.getElementById('end-time');
-
-// endTime.addEventListener('input', function () {
-//   if (this.value.length === 2) {
-//     this.value += ':';
-//   }
-// });
-
-const hora = document.getElementById("start")
-const fim = document.getElementById('end')
-
-hora.focus()
+    fim.addEventListener("input", function() {
+        var value = this.value.replace(/\D/g, '');
+        var hours = value.substring(0, 2);
+        var minutes = value.substring(2, 4);
+        this.value = hours + (minutes ? ':' + minutes : '');
+    });
+});
 
 function calcularDiferenca() {
-  var inicioH = hora.value
-  var fimH = fim.value
+    var inicioH = hora.value;
+    var fimH = fim.value;
 
-  // Convertendo os horários para objetos Date
-  var inicioObj = new Date("2020-01-01T" + inicioH + ":00");
-  var fimObj = new Date("2020-01-01T" + fimH + ":00");
+    // Verificando se os horários têm o formato correto
+    if (!validarFormatoHorario(inicioH) || !validarFormatoHorario(fimH)) {
+        document.getElementById("error").innerHTML = "Erro. Informe os horários no formato HH:MM.";
+        document.getElementById("error").classList.add("show"); // Adiciona a classe "show" para exibir a mensagem de erro
+        document.getElementById("resultado").innerHTML = "";
 
-  // Calculando a diferença de tempo em milissegundos
-  var diferenca = Math.abs(fimObj - inicioObj);
+        // Coloca o foco no primeiro input
+        hora.focus();
 
-  // Convertendo a diferença de tempo em horas e minutos
-  var horas = Math.floor(diferenca / (1000 * 60 * 60));
-  var minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+        // Define um tempo para a mensagem de erro desaparecer após 3 segundos
+        setTimeout(function() {
+            document.getElementById("error").classList.remove("show"); // Remove a classe "show" para ocultar a mensagem de erro
+        }, 3000);
 
-  if (!horas & !minutos) {
-    document.getElementById("error").innerHTML = "Erro. Informe os horários"
-    document.getElementById("resultado").innerHTML = "";
-  } else {
-    document.getElementById("error").innerHTML = ""
-    document.getElementById("resultado").innerHTML = "Diferença: " + horas + " horas e " + minutos + " minutos.";
-  }
+        return;
+    }
 
-  var inicioH = hora.value = ""
-  var fimH = fim.value = ""
+    // Convertendo os horários para objetos Date
+    var inicioObj = new Date("2020-01-01T" + inicioH + ":00");
+    var fimObj = new Date("2020-01-01T" + fimH + ":00");
 
-  hora.focus()
+    // Calculando a diferença de tempo em milissegundos
+    var diferenca = Math.abs(fimObj - inicioObj);
+
+    // Convertendo a diferença de tempo em horas e minutos
+    var horas = Math.floor(diferenca / (1000 * 60 * 60));
+    var minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+
+    if (horas === 0 && minutos === 0) {
+        document.getElementById("error").innerHTML = "Erro. Os horários são iguais.";
+        document.getElementById("error").classList.add("show"); // Adiciona a classe "show" para exibir a mensagem de erro
+        document.getElementById("resultado").innerHTML = "";
+
+        // Coloca o foco no primeiro input
+        hora.focus();
+
+        // Define um tempo para a mensagem de erro desaparecer após 3 segundos
+        setTimeout(function() {
+            document.getElementById("error").classList.remove("show"); // Remove a classe "show" para ocultar a mensagem de erro
+        }, 3000);
+
+    } else {
+        document.getElementById("error").innerHTML = "";
+        document.getElementById("error").classList.remove("show"); // Remove a classe "show" para ocultar a mensagem de erro
+        document.getElementById("resultado").innerHTML = "Diferença: " + horas + " horas e " + minutos + " minutos.";
+    }
+
+    // Limpar os campos de entrada
+    hora.value = "";
+    fim.value = "";
+    hora.focus();
 }
 
+function validarFormatoHorario(horario) {
+    var pattern = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+    return pattern.test(horario);
+}
