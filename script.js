@@ -85,6 +85,7 @@ function calcularDiferenca() {
 
   if (!horas & !minutos) {
     document.getElementById("error").innerHTML = "Erro. Informe os horários"
+    document.getElementById("resultado").innerHTML = "";
   } else {
     document.getElementById("error").innerHTML = ""
     document.getElementById("resultado").innerHTML = "Diferença: " + horas + " horas e " + minutos + " minutos.";
