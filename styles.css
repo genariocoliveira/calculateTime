@@ -91,6 +91,13 @@ button:hover {
 }
 
 .resultado {
+  color: green;
+  font-weight: 700;
   margin-top: 20px;
   font-size: 18px;
+}
+.error{
+  color: rgb(197, 15, 15);
+  font-weight: 700;
+  margin-top: 1rem;
 }

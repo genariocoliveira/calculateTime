@@ -84,9 +84,10 @@ function calcularDiferenca() {
   var minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
 
   if (!horas & !minutos) {
-    alert('Erro')
+    document.getElementById("error").innerHTML = "Erro. Informe os horários"
   } else {
-    document.getElementById("resultado").innerHTML = horas + " horas e " + minutos + " minutos.";
+    document.getElementById("error").innerHTML = ""
+    document.getElementById("resultado").innerHTML = "Diferença: " + horas + " horas e " + minutos + " minutos.";
   }
 
   var inicioH = hora.value = ""
