@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Diferença de Horário</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="https://purepng.com/public/uploads/large/purepng.com-round-wall-clockelectronics-clock-watch-analog-clock-wall-clock-941524673255yj9ql.png">
+  
+  <title>Calculo de horas</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Calculadora de Diferença de Horário</h1>
-        <div class="input-container">
-            <label for="start">Horário de Início:</label>
-            <input type="text" id="start" maxlength="5" placeholder="HH:MM">
-        </div>
-        <div class="input-container">
-            <label for="end">Horário de Término:</label>
-            <input type="text" id="end" maxlength="5" placeholder="HH:MM">
-        </div>
-        <button onclick="calcularDiferenca()">Calcular</button>
-        <div id="error" class="error"></div>
-        <div id="resultado" class="resultado"></div>
-    </div>
-    <footer>
-        <p>© 2024 Todos os direitos reservados - Genário Carneiro</p>
-    </footer>
-
-    <script src="script.js"></script>
+<div class="container">
+<h1>Calculadora de Diferença de Horário</h1>
+<div class="input-container">
+  <label for="start">Horário de Início:</label>
+  <input type="text" id="start" maxlength="5" placeholder="HH:MM">
+</div>
+<div class="input-container">
+  <label for="end">Horário de Término:</label>
+  <input type="text" id="end" maxlength="5" placeholder="HH:MM">
+</div>
+<button onclick="calcularDiferenca()">Calcular</button>
+<div id="error" class="error"></div>
+<div id="resultado" class="resultado"></div>
+</div>
+<footer>
+<p>© 2024 Calculadora de Diferença de Horário</p>
+</footer>
+  <script src="script.js"></script>
 </body>
 </html>
