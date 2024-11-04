@@ -1,83 +1,95 @@
-const hora = document.getElementById("start");
-const fim = document.getElementById('end');
-
-hora.focus();
-
-// Adicionando os dois pontos automaticamente ao digitar nos campos de entrada de texto
 document.addEventListener("DOMContentLoaded", function() {
-    hora.addEventListener("input", function() {
-        var value = this.value.replace(/\D/g, '');
-        var hours = value.substring(0, 2);
-        var minutes = value.substring(2, 4);
-        this.value = hours + (minutes ? ':' + minutes : '');
-    });
+  const horaInput = document.getElementById("start");
+  const fimInput = document.getElementById("end");
 
-    fim.addEventListener("input", function() {
-        var value = this.value.replace(/\D/g, '');
-        var hours = value.substring(0, 2);
-        var minutes = value.substring(2, 4);
-        this.value = hours + (minutes ? ':' + minutes : '');
-    });
+  if (horaInput && fimInput) {
+      // Adicionando os dois pontos automaticamente ao digitar nos campos de entrada de texto
+      horaInput.addEventListener("input", function() {
+          var value = this.value.replace(/\D/g, '');
+          var hours = value.substring(0, 2);
+          var minutes = value.substring(2, 4);
+          this.value = hours + (minutes ? ':' + minutes : '');
+      });
+      
+      fimInput.addEventListener("input", function() {
+          var value = this.value.replace(/\D/g, '');
+          var hours = value.substring(0, 2);
+          var minutes = value.substring(2, 4);
+          this.value = hours + (minutes ? ':' + minutes : '');
+      });
+  }
 });
 
 function calcularDiferenca() {
-    var inicioH = hora.value;
-    var fimH = fim.value;
+  const horaInput = document.getElementById("start");
+  const fimInput = document.getElementById("end");
+  
+  if (!horaInput || !fimInput) {
+      console.error("Elementos de input não encontrados");
+      return;
+  }
 
-    // Verificando se os horários têm o formato correto
-    if (!validarFormatoHorario(inicioH) || !validarFormatoHorario(fimH)) {
-        document.getElementById("error").innerHTML = "Erro. Informe os horários no formato HH:MM.";
-        document.getElementById("error").classList.add("show"); // Adiciona a classe "show" para exibir a mensagem de erro
-        document.getElementById("resultado").innerHTML = "";
+  var inicioH = horaInput.value;
+  var fimH = fimInput.value;
 
-        // Coloca o foco no primeiro input
-        hora.focus();
+  // Verificando se os horários têm o formato correto
+  if (!validarFormatoHorario(inicioH) || !validarFormatoHorario(fimH)) {
+      mostrarErro("Erro. Informe os horários no formato HH:MM.");
+      return;
+  }
 
-        // Define um tempo para a mensagem de erro desaparecer após 3 segundos
-        setTimeout(function() {
-            document.getElementById("error").classList.remove("show"); // Remove a classe "show" para ocultar a mensagem de erro
-        }, 3000);
+  // Separando horas e minutos do início e fim
+  var [horaInicio, minutoInicio] = inicioH.split(':').map(Number);
+  var [horaFim, minutoFim] = fimH.split(':').map(Number);
 
-        return;
-    }
+  // Calculando a diferença total em minutos
+  let diferencaMinutos = 0;
+  
+  // Se o horário final for menor ou igual ao inicial, adiciona 24 horas
+  if (horaFim < horaInicio || (horaFim === horaInicio && minutoFim <= minutoInicio)) {
+      diferencaMinutos = ((horaFim + 24) * 60 + minutoFim) - (horaInicio * 60 + minutoInicio);
+  } else {
+      diferencaMinutos = (horaFim * 60 + minutoFim) - (horaInicio * 60 + minutoInicio);
+  }
 
-    // Convertendo os horários para objetos Date
-    var inicioObj = new Date("2020-01-01T" + inicioH + ":00");
-    var fimObj = new Date("2020-01-01T" + fimH + ":00");
+  // Convertendo para o formato HH:MM
+  const totalHoras = Math.floor(diferencaMinutos / 60);
+  const totalMinutos = diferencaMinutos % 60;
 
-    // Calculando a diferença de tempo em milissegundos
-    var diferenca = Math.abs(fimObj - inicioObj);
+  // Formatando a mensagem de resultado
+  let mensagem = `Duração: ${totalHoras}:${totalMinutos.toString().padStart(2, '0')}`;
 
-    // Convertendo a diferença de tempo em horas e minutos
-    var horas = Math.floor(diferenca / (1000 * 60 * 60));
-    var minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+  // Exibindo o resultado
+  const errorElement = document.getElementById("error");
+  const resultadoElement = document.getElementById("resultado");
 
-    if (horas === 0 && minutos === 0) {
-        document.getElementById("error").innerHTML = "Erro. Os horários são iguais.";
-        document.getElementById("error").classList.add("show"); // Adiciona a classe "show" para exibir a mensagem de erro
-        document.getElementById("resultado").innerHTML = "";
+  if (errorElement && resultadoElement) {
+      errorElement.innerHTML = "";
+      errorElement.classList.remove("show");
+      resultadoElement.innerHTML = mensagem;
+  }
 
-        // Coloca o foco no primeiro input
-        hora.focus();
-
-        // Define um tempo para a mensagem de erro desaparecer após 3 segundos
-        setTimeout(function() {
-            document.getElementById("error").classList.remove("show"); // Remove a classe "show" para ocultar a mensagem de erro
-        }, 3000);
-
-    } else {
-        document.getElementById("error").innerHTML = "";
-        document.getElementById("error").classList.remove("show"); // Remove a classe "show" para ocultar a mensagem de erro
-        document.getElementById("resultado").innerHTML = "Diferença: " + horas + " horas e " + minutos + " minutos.";
-    }
-
-    // Limpar os campos de entrada
-    hora.value = "";
-    fim.value = "";
-    hora.focus();
+  // Limpar os campos de entrada
+  horaInput.value = "";
+  fimInput.value = "";
 }
 
 function validarFormatoHorario(horario) {
-    var pattern = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
-    return pattern.test(horario);
+  var pattern = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+  return pattern.test(horario);
+}
+
+function mostrarErro(mensagem) {
+  const errorElement = document.getElementById("error");
+  const resultadoElement = document.getElementById("resultado");
+
+  if (errorElement && resultadoElement) {
+      errorElement.innerHTML = mensagem;
+      errorElement.classList.add("show");
+      resultadoElement.innerHTML = "";
+      
+      setTimeout(function() {
+          errorElement.classList.remove("show");
+      }, 3000);
+  }
 }
