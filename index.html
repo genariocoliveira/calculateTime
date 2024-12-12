@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/png" href="https://purepng.com/public/uploads/large/purepng.com-round-wall-clockelectronics-clock-watch-analog-clock-wall-clock-941524673255yj9ql.png">
+  <link rel="icon" type="image/png"
+    href="https://purepng.com/public/uploads/large/purepng.com-round-wall-clockelectronics-clock-watch-analog-clock-wall-clock-941524673255yj9ql.png">
   <title>Calculadora de Horários</title>
 </head>
+
 <body>
   <div class="modal" id="modal">
     <div class="modal-content">
@@ -30,7 +33,7 @@
     <button onclick="calcularDiferenca()">Calcular</button>
     <div id="resultado" class="resultado"></div>
     <div id="error" class="error"></div>
-    <button id="backToModalCalcular" class="back-btn">Voltar</button>
+    <ion-icon id="backToModalCalcular" class="back-btn" name="arrow-back-outline"></ion-icon>
   </div>
 
   <div id="containerSomar" class="container" style="display:none;">
@@ -45,13 +48,15 @@
     </div>
     <button onclick="somarHoras()">Somar</button>
     <div id="resultadoSomar" class="resultado"></div>
-    <button id="backToModalSomar" class="back-btn">Voltar</button>
+    <ion-icon id="backToModalSomar" class="back-btn" name="arrow-back-outline"></ion-icon>
   </div>
 
   <footer>
     <p>Todos os direitos reservados Genário Carneiro</p>
   </footer>
-
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
