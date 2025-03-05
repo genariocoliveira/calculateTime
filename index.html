@@ -1,62 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/png"
-    href="https://purepng.com/public/uploads/large/purepng.com-round-wall-clockelectronics-clock-watch-analog-clock-wall-clock-941524673255yj9ql.png">
-  <title>Calculadora de Horários</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="clock-icon.svg">
+    <meta name="description" content="Calculadora de horários simples e intuitiva">
 </head>
-
 <body>
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <h2>Escolha uma opção</h2>
-      <button id="calcularBtn">Calcular Diferença de Horas</button>
-      <button id="somarBtn">Somar Horas</button>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Escolha uma opção</h2>
+            <div class="actions">
+                <button id="calcularBtn" class="btn">Calcular Diferença</button>
+                <button id="somarBtn" class="btn">Somar Horas</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div id="containerCalcular" class="container" style="display:none;">
-    <h1>Calculadora de Diferença de Horário</h1>
-    <div class="input-container">
-      <label for="start">Horário de Início:</label>
-      <input type="text" id="start" maxlength="5" placeholder="HH:MM">
+    <div id="containerCalcular" class="container" style="display:none;">
+        <button id="backToModalCalcular" class="back-btn">←</button>
+        <h1>Calcular Diferença</h1>
+        
+        <div class="input-group">
+            <label for="start">Horário de Início</label>
+            <input type="text" id="start" maxlength="5" placeholder="HH:MM">
+        </div>
+        
+        <div class="input-group">
+            <label for="end">Horário de Término</label>
+            <input type="text" id="end" maxlength="5" placeholder="HH:MM">
+        </div>
+        
+        <button onclick="calcularDiferenca()" class="btn">Calcular</button>
+        
+        <div id="resultado" class="result"></div>
+        <div id="error" class="result" style="color: red; display: none;"></div>
     </div>
-    <div class="input-container">
-      <label for="end">Horário de Término:</label>
-      <input type="text" id="end" maxlength="5" placeholder="HH:MM">
-    </div>
-    <button onclick="calcularDiferenca()">Calcular</button>
-    <div id="resultado" class="resultado"></div>
-    <div id="error" class="error"></div>
-    <ion-icon id="backToModalCalcular" class="back-btn" name="arrow-back-outline"></ion-icon>
-  </div>
 
-  <div id="containerSomar" class="container" style="display:none;">
-    <h1>Somar Horas</h1>
-    <div class="input-container">
-      <label for="horaSomar">Horário a somar:</label>
-      <input type="text" id="horaSomar" maxlength="5" placeholder="HH:MM">
+    <div id="containerSomar" class="container" style="display:none;">
+        <button id="backToModalSomar" class="back-btn">←</button>
+        <h1>Somar Horas</h1>
+        
+        <div class="input-group">
+            <label for="horaSomar">Horário a somar</label>
+            <input type="text" id="horaSomar" maxlength="5" placeholder="HH:MM">
+        </div>
+        
+        <div class="input-group">
+            <label for="horasMinutosAdicionar">Horas a adicionar</label>
+            <input type="text" id="horasMinutosAdicionar" maxlength="5" placeholder="HH:MM">
+        </div>
+        
+        <button onclick="somarHoras()" class="btn">Somar</button>
+        
+        <div id="resultadoSomar" class="result"></div>
     </div>
-    <div class="input-container">
-      <label for="horasMinutosAdicionar">Horas e minutos a adicionar:</label>
-      <input type="text" id="horasMinutosAdicionar" maxlength="5" placeholder="HH:MM">
-    </div>
-    <button onclick="somarHoras()">Somar</button>
-    <div id="resultadoSomar" class="resultado"></div>
-    <ion-icon id="backToModalSomar" class="back-btn" name="arrow-back-outline"></ion-icon>
-  </div>
 
-  <footer>
-    <p>Todos os direitos reservados Genário Carneiro</p>
-  </footer>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>
